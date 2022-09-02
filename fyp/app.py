@@ -154,7 +154,7 @@ if check_password():
     
     #%% MATLAB Implementation
     st.write("Simulation of the Utility 2.0 PV Mini-grid")
-    image = Image.open('deployment_original/streamlit/fyp/media/utility_20_1.jpg')
+    image = Image.open('fyp/media/utility_20_1.jpg')
     st.image(image, caption='Setup of the Utility 2.0 PV Minigrid in MATLAB')
     
     #%% Site Location
