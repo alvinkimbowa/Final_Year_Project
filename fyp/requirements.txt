@@ -1,0 +1,7 @@
+numpy
+keras
+tensorflow==2.8
+plotly
+matplotlib
+sklearn
+natsort
