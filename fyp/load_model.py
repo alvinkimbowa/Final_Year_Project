@@ -26,7 +26,7 @@ random.seed(125)
 #%%
 # Data Preprocessing
 
-folder = 'deployment_original/streamlit/fyp/Data'
+folder = 'fyp/Data'
 file = 'Residential_1.csv'
 
 # pprint(files[:4])
@@ -277,7 +277,7 @@ X_test = np.expand_dims(X_test, axis=2)
 We use the best model to do the evaluation on all the datasets.
 """
 
-model_path = 'deployment_original/streamlit/fyp/models/load_model.h5'
+model_path = 'fyp/models/load_model.h5'
 best_model = tf.keras.models.load_model(model_path)
 
 #%%

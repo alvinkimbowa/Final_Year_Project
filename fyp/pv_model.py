@@ -20,7 +20,7 @@ random.seed(125)
 
 #%%
 def pv_pred():
-    folder = 'deployment_original/streamlit/fyp/Data'
+    folder = 'fyp/Data'
     file = "Site_3_01-2018_02-2018.csv"
             
     df = pd.read_csv(os.path.join(folder, file))
@@ -113,7 +113,7 @@ def pv_pred():
     assert y_train.shape[1:] == y_val.shape[1:] == y_test.shape[1:]
     
 
-    model_path = "deployment_original/streamlit/fyp/models/pv_model.h5"
+    model_path = "fyp/models/pv_model.h5"
     
     model = tf.keras.models.load_model(model_path)
     # print(model.summary())
