@@ -135,7 +135,7 @@ def pv_pred():
     y_true = sc_y.inverse_transform(y_true.reshape(-1,1))
     print(y_true.shape)
     
-    df = pd.DataFrame({'Actual Active Power':y_true, 'Prediction':y_pred})
+    df = pd.DataFrame({'Actual Active Power':y_true[:,0], 'Prediction':y_pred[:,0]})
     
     return df
 #%%    
