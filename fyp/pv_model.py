@@ -122,7 +122,7 @@ def pv_pred():
     
     from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
     
-    y_pred = best_model.predict(X_test)
+    y_pred = model.predict(X_test)
     y_pred = np.concatenate([y_pred[:,0], y_pred[-1]], axis=0)
     # print("y_pred: ", y_pred.shape)
 
@@ -133,7 +133,7 @@ def pv_pred():
     y_pred = sc_y.inverse_transform(y_pred.reshape(-1,1))
     # print(y_pred.shape)
     y_true = sc_y.inverse_transform(y_true.reshape(-1,1))
-        
+
     df = pd.DataFrame({'Actual Active Power':y_true, 'Prediction':y_pred})
     
     return df
