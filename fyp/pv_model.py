@@ -124,16 +124,17 @@ def pv_pred():
     
     y_pred = model.predict(X_test)
     y_pred = np.concatenate([y_pred[:,0], y_pred[-1]], axis=0)
-    # print("y_pred: ", y_pred.shape)
+    print("y_pred: ", y_pred.shape)
 
     y_true = y_test.copy()
     y_true = np.concatenate([y_true[:,0], y_true[-1]], axis=0)
-    # print("y_true: ", y_true.shape)
+    print("y_true: ", y_true.shape)
 
     y_pred = sc_y.inverse_transform(y_pred.reshape(-1,1))
-    # print(y_pred.shape)
+    print(y_pred.shape)
     y_true = sc_y.inverse_transform(y_true.reshape(-1,1))
-
+    print(y_true.shape)
+    
     df = pd.DataFrame({'Actual Active Power':y_true, 'Prediction':y_pred})
     
     return df
