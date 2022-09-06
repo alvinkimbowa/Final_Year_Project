@@ -122,33 +122,30 @@ def pv_pred():
     
     from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
     
-    y_pred = model.predict(X_test)
-    # y_pred = y_pred[:,-1]
+    y_pred = best_model.predict(X_test)
+    y_pred = np.concatenate([y_pred[:,0], y_pred[-1]], axis=0)
+    print("y_pred: ", y_pred.shape)
+
     y_true = y_test.copy()
-    
-    
-    # print("y_test: ", y_test.shape)
-    print(y_pred.shape, y_true.shape)
-    
-    nrmse = np.sqrt(model.evaluate(X_test, y_test, verbose=0))
-    
+    y_true = np.concatenate([y_true[:,0], y_true[-1]], axis=0)
+    print("y_true: ", y_true.shape)
+
     y_pred = sc_y.inverse_transform(y_pred.reshape(-1,1))
+    print(y_pred.shape)
     y_true = sc_y.inverse_transform(y_true.reshape(-1,1))
-    
-    y_pred = y_pred.reshape(-1,24,1)
-    y_true = y_true.reshape(-1,24,1)
-    
-    y_pred = y_pred[:,-1,0]
-    y_true = y_true[:,-1,0]
-    
-    rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-    mae = mean_absolute_error(y_true, y_pred)
-    # mape = mean_absolute_percentage_error(y_true, y_pred)
-    
-    print("nRMSE: {}(kW)".format(nrmse))
-    print("RMSE: {}(kW)".format(rmse))
-    print("MAE: {}(kW)".format(mae))
-    # print("MAPE: ", mape)
+
+    plt.plot(y_true, label='Actual Power Output')
+    plt.plot(y_pred, label='Predicted Power Output')
+    plt.legend()
+    plt.title("Actual Power Output vs Predicted Power Output")
+    plt.xlabel("Time (h)")
+    plt.ylabel("Power output (kW)")
+    plt.ylim([0,120])
+    plt.gcf().set_dpi(300)
+    plt.legend(ncol=2)
+    plt.savefig(os.path.join(sweep_folder, 'Predictions', f'sample_pred_{i} (kW)'))
+    plt.gcf().set_dpi(80)
+    plt.show()
     
     df = pd.DataFrame({'Actual Active Power':y_true, 'Prediction':y_pred})
     
