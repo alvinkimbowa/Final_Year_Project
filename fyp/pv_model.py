@@ -118,35 +118,22 @@ def pv_pred():
     model = tf.keras.models.load_model(model_path)
     # print(model.summary())
     
-    model.evaluate(X_test, y_test)
+    # model.evaluate(X_test, y_test)
     
     from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
     
     y_pred = best_model.predict(X_test)
     y_pred = np.concatenate([y_pred[:,0], y_pred[-1]], axis=0)
-    print("y_pred: ", y_pred.shape)
+    # print("y_pred: ", y_pred.shape)
 
     y_true = y_test.copy()
     y_true = np.concatenate([y_true[:,0], y_true[-1]], axis=0)
-    print("y_true: ", y_true.shape)
+    # print("y_true: ", y_true.shape)
 
     y_pred = sc_y.inverse_transform(y_pred.reshape(-1,1))
-    print(y_pred.shape)
+    # print(y_pred.shape)
     y_true = sc_y.inverse_transform(y_true.reshape(-1,1))
-
-    # plt.plot(y_true, label='Actual Power Output')
-    # plt.plot(y_pred, label='Predicted Power Output')
-    # plt.legend()
-    # plt.title("Actual Power Output vs Predicted Power Output")
-    # plt.xlabel("Time (h)")
-    # plt.ylabel("Power output (kW)")
-    # plt.ylim([0,120])
-    # plt.gcf().set_dpi(300)
-    # plt.legend(ncol=2)
-    # plt.savefig(os.path.join(sweep_folder, 'Predictions', f'sample_pred_{i} (kW)'))
-    # plt.gcf().set_dpi(80)
-    # plt.show()
-    
+        
     df = pd.DataFrame({'Actual Active Power':y_true, 'Prediction':y_pred})
     
     return df
