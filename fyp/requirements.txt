@@ -1,6 +1,6 @@
 numpy
 keras
-tensorflow==2.8
+tensorflow==2.8.1
 plotly
 matplotlib
 scikit-learn
